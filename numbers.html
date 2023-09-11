@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>chase and eat game</title>
+    <style>
+        td {
+            border: 1px solid black;
+            width: 2em;
+            height: 2em;
+            margin: 0em;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        #out {
+            margin: 0 auto;
+            text-align: center
+        }
+
+        table {
+            margin: 0 auto;
+            text-align: center
+        }
+    </style>
+    <script type="module">
+        import main from "./js/numbers.js";
+        let app = document.getElementById("app");
+        let table = document.createElement("table");
+        table.setAttribute("Id", "tab");
+        main.init(table);
+        app.appendChild(table);
+        let button = document.getElementById("next");
+        button.addEventListener("click", (event) => { main.nextStage(main) }); //Enter the next stage
+        let button2 = document.getElementById("restart");
+        button2.addEventListener("click", (event) => { main.init(table); }); //restart
+        let button3 = document.getElementById("Size");
+        button3.addEventListener("click", (event) => { 
+                main.x = Number(document.getElementById("x").value); 
+                main.y = Number(document.getElementById("y").value); 
+                main.init(table); 
+            }
+        )
+    </script>
+</head>
+
+<body>
+    <div id="out">
+        <div>
+            <h5>Help</h5>
+            <div id="Stage_0" style="display: none;">
+                <p><strong>Stage_0:place block</strong>Click a cell and type b to place a block</p>
+            </div>
+            <div id="Stage_1" style="display: none;">
+                <p><strong>Stage_1:place red block</strong> on a cell and type one of the numbers 1 to 4 </p>
+                <p>You can place at most 3 red blocks with number1,</p>
+                <p>at most 2 red blocks with number2, at most 2 red </p>
+                <p>blocks with number3, at most 1 red block with number4 </p>
+            </div>
+            <div id="Stage_2" style="display: none;">
+                <p><strong>Stage_2:place black block</strong> click on a cell and type one of the numbers 1 to 4 </p>
+                <p>you can place at most 3 black blocks with number1, </p>
+                <p>at most 2 black blocks with number2, at most 2 black </p>
+                <p>blocks with number3, at most 1 black block with number4 </p>
+            </div>
+            <div id="Stage_3" style="display: none;">
+                <p><strong>Stage_3:Playing</strong> You are the red blocks. Select a red block and type</p>
+                <p>a,w,s,d to move left,up,down,right.Eat black blocks with number smaller than you!</p>
+                <p>Avoid being eaten by black blocks with number greater than or equal to you!</p>
+                <p>Exception: red 1 can eat black 4! You can only move one red block each turn.You can't move onto a block.</p>
+            </div>
+        </div>
+        <div id="app"></div>
+        <br />
+        <span id="status">Stage_0: Place Block</span>
+        <br />
+        <span id="turn"></span>&emsp;&emsp;<span id="Red"></span>&emsp;&emsp;<span id="Black"></span>
+        <br />
+        <button id="next">Next</button>
+        <button id="restart">Re Start</button>
+        <br/>
+        <span>y:</span><input id="y" />&emsp;&emsp;<span>x:</span><input id="x" />&emsp;&emsp;<button id="Size">Change Size</button>
+    </div>
+</body>
+
+</html>
